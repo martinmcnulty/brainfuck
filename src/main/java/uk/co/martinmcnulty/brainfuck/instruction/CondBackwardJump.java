@@ -7,20 +7,29 @@ import uk.co.martinmcnulty.brainfuck.Context;
 
 public class CondBackwardJump implements Instruction {
 
+    private int jumpDestination = -1;
+
     public void execute(Context c) throws IOException {
 	if (c.getData() != 0) {
-	    int closeCount = 1;
-	    int instructionPointer = c.getInstructionPointer();
-	    while (closeCount > 0) {
-		Instruction instruction = c.getInstruction(instructionPointer - 2);
-		closeCount -= instruction.getJumpCount();
-		instructionPointer--;
+	    if (jumpDestination == -1) {
+		int instructionPointer = c.getInstructionPointer();
+		jumpDestination =getJumpDestination(instructionPointer, c);
 	    }
-	    c.setInstructionPointer(instructionPointer);
+	    c.setInstructionPointer(jumpDestination);
 	}
     }
 
     public int getJumpCount() {
 	return -1;
+    }
+
+    private int getJumpDestination(int instructionPointer, Context c) {
+	int closeCount = 1;
+	while (closeCount > 0) {
+	    Instruction instruction = c.getInstruction(instructionPointer - 2);
+	    closeCount -= instruction.getJumpCount();
+	    instructionPointer--;
+	}
+	return instructionPointer;
     }
 }
