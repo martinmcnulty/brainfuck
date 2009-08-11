@@ -11,4 +11,8 @@ public class DecData implements Instruction {
 	c.decrementData();
     }
 
+    public int getJumpCount() {
+	return 0;
+    }
+
 }

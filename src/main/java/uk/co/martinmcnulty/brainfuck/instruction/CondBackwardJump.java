@@ -13,16 +13,14 @@ public class CondBackwardJump implements Instruction {
 	    int instructionPointer = c.getInstructionPointer();
 	    while (closeCount > 0) {
 		Instruction instruction = c.getInstruction(instructionPointer - 2);
-		if (instruction instanceof CondForwardJump) {
-		    //System.out.println("Found [ at " + (instructionPointer - 2) + ", closeCount now " + (closeCount - 1));
-		    closeCount--;
-		}
-		else if (instruction instanceof CondBackwardJump) {
-		    closeCount++;
-		}
+		closeCount -= instruction.getJumpCount();
 		instructionPointer--;
 	    }
 	    c.setInstructionPointer(instructionPointer);
 	}
+    }
+
+    public int getJumpCount() {
+	return -1;
     }
 }

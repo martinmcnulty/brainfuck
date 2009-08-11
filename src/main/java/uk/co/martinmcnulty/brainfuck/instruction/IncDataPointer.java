@@ -9,4 +9,8 @@ public class IncDataPointer implements Instruction {
 	c.incrementDataPointer();
     }
 
+    public int getJumpCount() {
+	return 0;
+    }
+
 }

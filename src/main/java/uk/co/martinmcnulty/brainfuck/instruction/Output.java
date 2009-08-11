@@ -11,4 +11,8 @@ public class Output implements Instruction {
 	c.write();
     }
 
+    public int getJumpCount() {
+	return 0;
+    }
+
 }

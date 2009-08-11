@@ -11,4 +11,8 @@ public class Input implements Instruction {
 	c.read();
     }
 
+    public int getJumpCount() {
+	return 0;
+    }
+
 }

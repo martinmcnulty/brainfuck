@@ -9,4 +9,8 @@ public class DecDataPointer implements Instruction {
 	c.decrementDataPointer();
     }
 
+    public int getJumpCount() {
+	return 0;
+    }
+
 }

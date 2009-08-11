@@ -11,4 +11,8 @@ public class IncData implements Instruction {
 	c.incrementData();
     }
 
+    public int getJumpCount() {
+	return 0;
+    }
+
 }
