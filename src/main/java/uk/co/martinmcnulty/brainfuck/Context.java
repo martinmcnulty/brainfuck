@@ -85,6 +85,7 @@ public class Context {
 	if (read == -1) {
 	    throw new EOFException();
 	}
-	data[dataPointer] = (byte) (in.read() & 0xff);
+	//System.out.println("Read: " + read);
+	data[dataPointer] = (byte) (read & 0xff);
     }
 }
