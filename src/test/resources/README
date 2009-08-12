@@ -1,0 +1,9 @@
+The sample programs are not mine.  Sources as follows:
+
+ * hello-word.bf - http://en.wikipedia.org/wiki/Brainfuck
+ * commented-hello-world.bf - http://en.wikipedia.org/wiki/Brainfuck
+ * bottles.bf - http://esoteric.sange.fi/brainfuck/bf-source/prog/
+ * gameoflife.bf - http://esoteric.sange.fi/brainfuck/bf-source/prog/
+ * mandelbrot.bf - http://esoteric.sange.fi/brainfuck/bf-source/prog/
+
+If you are the author of one of these programs, and would rather your code was not available here, please email brainfuck@martinmcnulty.co.uk and I will take it down as soon as I can.
