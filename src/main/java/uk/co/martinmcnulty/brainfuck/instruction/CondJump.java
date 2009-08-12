@@ -5,12 +5,18 @@ import java.io.IOException;
 import uk.co.martinmcnulty.brainfuck.Instruction;
 import uk.co.martinmcnulty.brainfuck.Context;
 
-public class CondBackwardJump implements Instruction {
+public class CondJump implements Instruction {
 
     private int jumpDestination = -1;
 
+    private final boolean forward;
+
+    public CondJump(boolean forward) {
+	this.forward = forward;
+    }
+
     public void execute(Context c) throws IOException {
-	if (c.getData() != 0) {
+	if ((forward && c.getData() == 0) || (! forward && c.getData() != 0)) {
 	    if (jumpDestination == -1) {
 		int instructionPointer = c.getInstructionPointer();
 		jumpDestination = getJumpDestination(instructionPointer, c);
@@ -20,16 +26,17 @@ public class CondBackwardJump implements Instruction {
     }
 
     public int getJumpCount() {
-	return -1;
+	return forward ? 1 : -1;
     }
 
     private int getJumpDestination(int instructionPointer, Context c) {
 	int openCount = getJumpCount();
 	while (openCount != 0) {
-	    Instruction instruction = c.getInstruction(instructionPointer - 2);
+	    Instruction instruction = c.getInstruction(instructionPointer + (forward ? 0 : -2));
 	    openCount += instruction.getJumpCount();
-	    instructionPointer--;
+	    instructionPointer += forward ? 1 : -1;
 	}
 	return instructionPointer;
     }
+
 }

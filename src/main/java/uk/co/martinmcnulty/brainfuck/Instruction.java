@@ -2,8 +2,7 @@ package uk.co.martinmcnulty.brainfuck;
 
 import java.io.IOException;
 
-import uk.co.martinmcnulty.brainfuck.instruction.CondForwardJump;
-import uk.co.martinmcnulty.brainfuck.instruction.CondBackwardJump;
+import uk.co.martinmcnulty.brainfuck.instruction.CondJump;
 
 public interface Instruction {
 
@@ -12,8 +11,8 @@ public interface Instruction {
     /**
      * Gets the 'bracket count:
      * <ul>
-     *   <li>1, if this is a {@link CondForwardJump}</li>
-     *   <li>-1, if this is a {@link CondBackwardJump}</li>
+     *   <li>1, if this is a forward {@link CondJump}</li>
+     *   <li>-1, if this is a backward {@link CondJump}</li>
      *   <li>0 otherwise</li>
      * </ul>
      * @return the 'bracket count'

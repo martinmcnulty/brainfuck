@@ -86,10 +86,10 @@ public class Interpreter {
 		instruction = new Input();
 		break;
 	    case '[':
-		instruction = new CondForwardJump();
+		instruction = new CondJump(true);
 		break;
 	    case ']':
-		instruction = new CondBackwardJump();
+		instruction = new CondJump(false);
 		break;
 	    default:
 		// Other symbols are ignored
