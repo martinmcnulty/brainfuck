@@ -83,10 +83,10 @@ public class Context {
 
     public void read() throws IOException {
 	int read = in.read();
-	if (read == -1) {
-	    throw new EOFException();
+
+	// Don't alter cell if we've reached EOF
+	if (read != -1) {
+	    data[dataPointer] = (byte) (read & 0xff);
 	}
-	//System.out.println("Read: " + read);
-	data[dataPointer] = (byte) (read & 0xff);
     }
 }
