@@ -78,6 +78,7 @@ public class Context {
 
     public void write() throws IOException {
 	out.write(((int) data[dataPointer]) & 0xff);
+	out.flush();
     }
 
     public void read() throws IOException {
