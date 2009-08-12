@@ -13,7 +13,7 @@ public class CondBackwardJump implements Instruction {
 	if (c.getData() != 0) {
 	    if (jumpDestination == -1) {
 		int instructionPointer = c.getInstructionPointer();
-		jumpDestination =getJumpDestination(instructionPointer, c);
+		jumpDestination = getJumpDestination(instructionPointer, c);
 	    }
 	    c.setInstructionPointer(jumpDestination);
 	}
@@ -24,10 +24,10 @@ public class CondBackwardJump implements Instruction {
     }
 
     private int getJumpDestination(int instructionPointer, Context c) {
-	int closeCount = 1;
-	while (closeCount > 0) {
+	int openCount = getJumpCount();
+	while (openCount != 0) {
 	    Instruction instruction = c.getInstruction(instructionPointer - 2);
-	    closeCount -= instruction.getJumpCount();
+	    openCount += instruction.getJumpCount();
 	    instructionPointer--;
 	}
 	return instructionPointer;

@@ -19,9 +19,13 @@ public class CondForwardJump implements Instruction {
 	}
     }
 
+    public int getJumpCount() {
+	return 1;
+    }
+
     private int getJumpDestination(int instructionPointer, Context c) {
-	int openCount = 1;
-	while (openCount > 0) {
+	int openCount = getJumpCount();
+	while (openCount != 0) {
 	    Instruction instruction = c.getInstruction(instructionPointer);
 	    openCount += instruction.getJumpCount();
 	    instructionPointer++;
@@ -29,7 +33,4 @@ public class CondForwardJump implements Instruction {
 	return instructionPointer;
     }
 
-    public int getJumpCount() {
-	return 1;
-    }
 }
