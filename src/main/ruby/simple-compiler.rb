@@ -3,7 +3,10 @@
 # Output: Program.class
 # Run the output with: java -cp . Program
 
-# Author: Martin McNulty (martin@martinmcnulty.co.uk)
+# Author: Martin McNulty (martin@martinmcnulty.co.uk, twitter.com/shamblepop)
+
+# Generates invalid class files if the brainfuck program is too long, as it sticks all
+# the generated code in one method (void run()).
 
 require 'java'
 require 'jruby'
