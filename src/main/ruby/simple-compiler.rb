@@ -1,3 +1,10 @@
+# Naive compiler for brainfuck
+# Usage: jruby -rubygems simple-compiler.rb <path/to/brainfuck/program.bf>
+# Output: Program.class
+# Run the output with: java -cp . Program
+
+# Author: Martin McNulty (martin@martinmcnulty.co.uk)
+
 require 'java'
 require 'jruby'
 require 'bitescript'
