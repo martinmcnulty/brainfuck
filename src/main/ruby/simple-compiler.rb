@@ -6,7 +6,8 @@
 # Author: Martin McNulty (martin@martinmcnulty.co.uk, twitter.com/shamblepop)
 
 # Generates invalid class files if the brainfuck program is too long, as it sticks all
-# the generated code in one method (void run()).
+# the generated code in one method (void run()).  Will happily compile a few of the examples
+# in http://svn.martinmcnulty.co.uk/brainfuck/brainfuck-interpreter/trunk/src/test/resources
 
 require 'java'
 require 'jruby'
