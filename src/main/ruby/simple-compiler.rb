@@ -62,29 +62,23 @@ def compile(filename)
         eachcharinfile(filename) do |c|
           case c.chr
           when '+'
-            withdata this do 
-              iconst_1
-              iadd
-            end
+            aload 0
+            invokevirtual this, "increment", [void]
           when '-'
-            withdata this do
-              iconst_1
-              isub
-            end
+            aload 0
+            invokevirtual this, "decrement", [void]
           when '>'
-            withpointer this do
-              iconst_1
-              iadd
-            end
+            aload 0
+            invokevirtual this, "incrementPointer", [void]
           when '<'
-            withpointer this do
-              iconst_1
-              isub
-            end
+            aload 0
+            invokevirtual this, "decrementPointer", [void]
           when ','
-            input this
+            aload 0
+            invokevirtual this, "read", [void]
           when '.'
-            output this
+            aload 0
+            invokevirtual this, "write", [void]
           when '['
             openloop this
           when ']'
@@ -94,13 +88,69 @@ def compile(filename)
         returnvoid
       end
 
-      public_method "print", void do
+      private_method "increment", void do
+        withdata this do
+          iconst_1
+          iadd
+        end
+        returnvoid
+      end
+
+      private_method "decrement", void do
+        withdata this do
+          iconst_1
+          isub
+        end
+        returnvoid
+      end
+
+      private_method "incrementPointer", void do
+        withpointer this do
+          iconst_1
+          iadd
+        end
+        returnvoid
+      end
+
+      private_method "decrementPointer", void do
+        withpointer this do
+          iconst_1
+          isub
+        end
+        returnvoid
+      end
+
+      private_method "write", void do
+        loaddata this
         getstatic System, :out, PrintStream
-        aload 0
-        getfield this, "data", byte[]
-        iconst_0
-        baload
-        invokevirtual PrintStream, :println, [void, int]
+        swap
+        invokevirtual OutputStream, :write, [void, int]
+        getstatic System, :out, PrintStream
+        invokevirtual OutputStream, :flush, [void]
+        returnvoid
+      end
+
+      private_method "read", void do
+        withdata this do 
+          getstatic System, :in, InputStream
+          invokevirtual InputStream, :read, [int]
+          
+          # Store original value, if we've reached the end of the file
+          dup
+          iconst_1
+          iadd
+
+          dontstore = label
+          endlabel = label
+
+          ifeq dontstore
+          swap
+          pop
+          goto endlabel
+          dontstore.set!
+          pop
+          endlabel.set!
+        end
         returnvoid
       end
     end
@@ -141,41 +191,7 @@ def withpointer(this)
   aload 0
   swap
   putfield this, "pointer", int
-end
-
-def input(this)
-  withdata this do 
-    getstatic System, :in, InputStream
-    invokevirtual InputStream, :read, [int]
-    
-    # Store original value, if we've reached the end of the file
-    dup
-    iconst_1
-    iadd
-
-    dontstore = label
-    endlabel = label
-
-    ifeq dontstore
-    swap
-    pop
-    goto endlabel
-    dontstore.set!
-    pop
-    endlabel.set!
-  end
-end  
-
-def output(this)
-  withdata this do
-    dup
-    getstatic System, :out, PrintStream
-    swap
-    invokevirtual OutputStream, :write, [void, int]
-    getstatic System, :out, PrintStream
-    invokevirtual OutputStream, :flush, [void]
-  end
-end
+end 
 
 def openloop(this)
   open = label
