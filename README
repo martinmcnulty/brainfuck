@@ -1,0 +1,15 @@
+Interpreter and compiler for Brainfuck
+
+== Interpreter ==
+
+ - Written in Java
+ - Uses the 'command' pattern (or possibly an approximation thereof)
+ - Built with Maven
+
+== Compiler ==
+
+ - Written in Jruby
+ - Uses headius's bitescript gem
+ - Compiles Brainfuck down to JVM bytecode
+
+More info on Brainfuck: http://en.wikipedia.org/wiki/Brainfuck
